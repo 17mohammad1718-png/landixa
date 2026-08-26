@@ -32,8 +32,9 @@ Goal: replicate the "multiple home versions" value driver of APPER/Apdash.
       a `data-theme="light"` attribute + token overrides
 - [x] Variant C: accent-shifted (e.g. warm) — `home-warm.html`
       <!-- 2A DONE 1405/06/04: merged to main, self-check extended to 19 rules -->
-- [ ] `blog/index.html` — blog list (6 demo posts, Jalali dates)
-- [ ] `blog/post.html` — single post layout (text + image placeholder)
+- [x] `blog/index.html` — blog list (6 demo posts, Jalali dates)
+- [x] `blog/post.html` — single post layout (text + image placeholder)
+      <!-- 2B DONE 1405/06/04: merged to main, self-check 22/22, resolver fixed for subfolders -->
 - [ ] `ltr/` — English LTR twin of the main page (translate copy, flip
       dir; logical CSS must make this near-zero-work)
 
