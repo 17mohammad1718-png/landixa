@@ -191,6 +191,7 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
 .lightbox.open{display:grid}
 .lightbox .lb-body{width:min(320px,88vw);max-height:84vh;overflow:auto;border-radius:24px;
   background:var(--bg-soft);border:1px solid var(--border);box-shadow:0 40px 80px -20px #000}
+.lightbox .lb-body .shot{width:100%;border-radius:24px;border:none;cursor:default}
 .lb-close{position:absolute;top:20px;inset-inline-end:24px;font-size:1.6rem;color:var(--muted);
   width:44px;height:44px;border-radius:50%;background:var(--card);border:1px solid var(--border)}
 .lb-close:hover{color:var(--text)}
@@ -265,8 +266,9 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
   html{scroll-padding-block-start:70px}
   .main-nav{position:fixed;inset-block-start:68px;inset-inline:0;flex-direction:column;
     background:var(--bg-soft);border-block:1px solid var(--border);padding:18px 24px;gap:16px;
-    transform:translateY(-130%);transition:transform .28s ease;z-index:40}
-  .main-nav.open{transform:translateY(0)}
+    transform:translateY(-130%);visibility:hidden;
+    transition:transform .28s ease,visibility 0s linear .28s;z-index:40}
+  .main-nav.open{transform:translateY(0);visibility:visible;transition:transform .28s ease}
   .nav-toggle{display:flex}
   .header-actions .btn{display:none}  /* hero store buttons are immediately visible below */
   .hero{padding-block:48px 40px}
