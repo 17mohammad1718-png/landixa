@@ -35,21 +35,23 @@ Goal: replicate the "multiple home versions" value driver of APPER/Apdash.
 - [x] `blog/index.html` — blog list (6 demo posts, Jalali dates)
 - [x] `blog/post.html` — single post layout (text + image placeholder)
       <!-- 2B DONE 1405/06/04: merged to main, self-check 22/22, resolver fixed for subfolders -->
-- [ ] `ltr/` — English LTR twin of the main page (translate copy, flip
+- [x] `ltr/` — English LTR twin of the main page (translate copy, flip
       dir; logical CSS must make this near-zero-work)
+      <!-- 2C DONE 1405/06/04: ltr/index.html, self-check 27/27 -->
 
 ## Phase 3 — package and listing (agent prepares, owner ships)
-- [ ] `docs/listing-copy.md` — full Persian listing text for rtl-theme
+- [x] `docs/listing-copy.md` — full Persian listing text for rtl-theme
       (H1, short desc, full HTML description, features list, FAQ,
       requirements box: "HTML5 / CSS3 / بدون وردپرس")
-- [ ] `docs/changelog.md` — versioned changelog with Jalali dates
-- [ ] Help.pdf source (Persian, follows easy-call build_help_pdf.py
+- [x] `docs/changelog.md` — versioned changelog with Jalali dates
+- [x] Help.pdf source (Persian, follows easy-call build_help_pdf.py
       pattern; reportlab, Vazirmatn, no personal links)
-- [ ] Package script `build_package.py`: produces
+- [x] Package script `build_package.py`: produces
       `Html_Package/1-Theme/theme.zip` + `Help.pdf` per rtl-theme HTML
       standard
-- [ ] Icon 320×320 + cover 2100×1040 + infographic — hand-built
+- [x] Icon 320×320 + cover 2100×1040 + infographic — hand-built
       HTML/CSS→PNG (NO AI images) (owner reviews before use)
+      <!-- 3A DONE 1405/06/04: all agent items complete, 27/27 checks -->
 - [ ] VirusTotal scan (owner, manual)
 - [ ] Demo deploy: GitHub Pages on this repo (owner)
 - [ ] Submit via rtl-theme vendor panel (owner)
