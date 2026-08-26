@@ -30,14 +30,24 @@ for (const [name, src] of Object.entries(files)) {
 ok('no external URLs / @import / CDN references in html+css+js',
    external.length === 0, external.join(' | '));
 
-/* ---- 2. every referenced local file exists ---- */
-const localRefs = new Set(); // resolved repo-relative paths
+/* ---- 2. every referenced local file exists ----
+   Refs resolve the way a browser resolves them: against the PAGE'S OWN
+   directory (a url() against the css file's dir), never against the repo
+   root — so ../assets/... inside a subfolder page (blog/) resolves. */
+const resolveFrom = (page, ref) =>
+  path.posix.normalize(path.posix.join(path.posix.dirname(page), ref));
+const refOnDisk = (page, ref) => {
+  if (ref.startsWith('#') || ref.startsWith('data:')) return true; // fragment / inline data
+  const file = ref.split('#')[0].split('?')[0]; // strip fragment + query
+  if (!file || /^(https?:)?\/\//i.test(file)) return true; // external: check 1's job
+  return existsSync(path.join(REPO, resolveFrom(page, file)));
+};
+const localRefs = new Set(); // refs as written in index.html (+ css url()s normalized)
 for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) localRefs.add(m[1]);
 for (const m of css.matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
-  localRefs.add(path.posix.normalize('assets/css/' + m[1]));
+  localRefs.add(path.posix.normalize('assets/css/' + m[1])); // url() resolves from assets/css/
 }
-const brokenRefs = [...localRefs].filter((r) =>
-  !r.startsWith('#') && !r.startsWith('data:') && !existsSync(path.join(REPO, r)));
+const brokenRefs = [...localRefs].filter((r) => !refOnDisk('index.html', r));
 ok('all local href/src/url() references exist on disk',
    brokenRefs.length === 0, brokenRefs.join(' | '));
 
@@ -129,8 +139,7 @@ for (const [p, src] of Object.entries(pageSources)) {
     .filter((a) => a !== '' && !ids2.has(a));
   if (brk.length) pageProblems.push(`${p}: broken anchors ${brk.join(', ')}`);
   const missingRefs = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
-    .filter((r) => !r.startsWith('#') && !r.startsWith('data:') &&
-      !existsSync(path.join(REPO, r)));
+    .filter((r) => !refOnDisk(p, r));
   if (missingRefs.length) pageProblems.push(`${p}: missing files ${missingRefs.join(', ')}`);
   const svgNoHide2 = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
   if (svgNoHide2.length) pageProblems.push(`${p}: ${svgNoHide2.length} svg without aria-hidden`);
