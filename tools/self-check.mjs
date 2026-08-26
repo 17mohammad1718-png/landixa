@@ -82,8 +82,15 @@ for (const [name, src] of Object.entries(files)) {
 }
 ok('no personal links (github.com / t.me / mailto / telegram)',
    personal.length === 0, personal.join(' | '));
-const gregorian = html.match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
-ok('no Gregorian-style dates in the page', !gregorian, gregorian);
+const datePages = ['index.html', 'home-light.html', 'home-warm.html',
+  'blog/index.html', 'blog/post.html'].filter((p) => existsSync(path.join(REPO, p)));
+const gregorian = [];
+for (const p of datePages) {
+  const g = read(p).match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
+  if (g) gregorian.push(`${p}: ${g[0]}`);
+}
+ok('no Gregorian-style dates on any page (Jalali only)',
+   gregorian.length === 0, gregorian.join(' | '));
 
 /* ---- 7. accessibility inventory (rule 9) ---- */
 const svgNoHide = [...html.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
@@ -154,6 +161,40 @@ const shared = Object.entries(pageSources).filter(([p]) => p !== 'index.html').e
   (src.match(/<link rel="stylesheet"/g) || []).length === 1);
 ok('variant pages share assets/css/style.css + main.js (one stylesheet each)',
    shared);
+
+/* ---- 9. blog pages (Phase 2B) ---- */
+const blogPages = ['blog/index.html', 'blog/post.html'];
+const missingBlog = blogPages.filter((p) => !existsSync(path.join(REPO, p)));
+ok('blog pages exist: blog/index.html + blog/post.html',
+   missingBlog.length === 0, missingBlog.join(' '));
+const blogSources = {};
+for (const p of blogPages) if (existsSync(path.join(REPO, p))) blogSources[p] = read(p);
+
+// rtl + the single shared stylesheet/script from the subfolder
+const blogBadAssets = Object.entries(blogSources).filter(([, src]) =>
+  !/<html[^>]+lang="fa"[^>]+dir="rtl"/.test(src) ||
+  !/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src) ||
+  (src.match(/<link rel="stylesheet"/g) || []).length !== 1 ||
+  !/<script src="\.\.\/assets\/js\/main\.js" defer><\/script>/.test(src)
+).map(([p]) => p);
+ok('blog pages: dir=rtl lang=fa + share ../assets/css/style.css + main.js',
+   blogBadAssets.length === 0, blogBadAssets.join(' '));
+
+// same hard rules as the home pages, refs resolved from the page's own dir
+const blogProblems = [];
+for (const [p, src] of Object.entries(blogSources)) {
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) blogProblems.push(`${p}: external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) blogProblems.push(`${p}: missing files ${missing.join(', ')}`);
+  const svgNoHideBlog = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgNoHideBlog.length) blogProblems.push(`${p}: ${svgNoHideBlog.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) blogProblems.push(`${p}: personal link ${pers[0]}`);
+}
+ok('blog pages: no external/personal links, refs resolve from blog/, svg aria-hidden',
+   blogProblems.length === 0, blogProblems.join(' | '));
 
 /* ---- report ---- */
 let failed = 0;

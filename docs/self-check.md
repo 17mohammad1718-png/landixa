@@ -12,16 +12,22 @@ anywhere) and a **manual browser** pass (the real proof).
 node tools/self-check.mjs
 ```
 
-Pure Node, **no dependencies, no `npm install`**. It reads `index.html`,
+Pure Node, **no dependencies, no `npm install`**. It reads every page
+(`index.html`, the two variant homes, the two blog pages),
 `assets/css/style.css` and `assets/js/main.js` and asserts every hard rule:
 
 - no external URLs / `@import` / CDN references (rules 1, 4)
-- every local `href` / `src` / `url()` exists on disk (no 404s from `file://`)
+- every local `href` / `src` / `url()` exists on disk, resolved against the
+  page's own directory (no 404s from `file://`; works inside subfolders
+  like `blog/`)
 - all named anchors resolve to existing `id`s
 - exactly the 3 local Vazirmatn `@font-face` files, all present, no other font source (rules 1, 3)
 - RTL-first: `dir="rtl"`, no physical `left/right` CSS properties (rule 2)
 - no personal links — `github.com`, `t.me/`, `mailto:`, `telegram` (rule 5, §6)
-- no Gregorian-style dates in the page (rule 4)
+- no Gregorian-style dates on any page — Jalali only (rule 4)
+- blog pages exist, are `dir=rtl lang=fa`, share the single
+  `../assets/css/style.css` + `main.js`, carry no external/personal links,
+  and their refs resolve from `blog/`
 - accessibility inventory: decorative SVGs `aria-hidden`, nav-toggle ARIA
   triple, lightbox `role=dialog`/`aria-modal`/labelled close, shots are
   keyboard buttons, reduced-motion kill present (rule 9)
