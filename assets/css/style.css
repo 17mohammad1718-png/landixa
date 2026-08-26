@@ -287,6 +287,16 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
   transition:opacity .55s ease,transform .55s ease}
 .will-reveal.revealed{opacity:1;transform:none}
 
+/* ---- Demo store-link hint (added by main.js) ---- */
+.toast{position:fixed;inset-block-end:24px;inset-inline-start:0;inset-inline-end:0;
+  margin-inline:auto;width:max-content;max-width:min(92vw,560px);
+  background:var(--card-2);border:1px solid var(--border);color:var(--text);
+  border-radius:14px;padding:12px 20px;font-size:.88rem;text-align:center;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.6);z-index:120;
+  opacity:0;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease;
+  pointer-events:none}
+.toast.show{opacity:1;transform:none}
+
 /* ---- Print safety (buyers may print the page) ---- */
 @media print{
   body{background:#fff;color:#111}

@@ -69,6 +69,33 @@
     });
   });
 
+  /* ---- Demo store links: '#' placeholders must not jump to top ----
+     If the buyer replaces the href with a real store URL the guard
+     no longer matches, so this is safe to leave in the shipped file. */
+  var hint = null;
+  function showHint() {
+    if (!hint) {
+      hint = document.createElement('div');
+      hint.className = 'toast';
+      hint.setAttribute('role', 'status');
+      document.body.appendChild(hint);
+      hint.textContent = 'لینک دمو — در نسخهٔ نهایی، href این دکمه را با لینک واقعی اپ خودتان جایگزین کنید.';
+    }
+    hint.classList.remove('show');
+    // restart the fade even if re-triggered while visible
+    void hint.offsetWidth;
+    hint.classList.add('show');
+    clearTimeout(hint._timer);
+    hint._timer = setTimeout(function () { hint.classList.remove('show'); }, 3200);
+  }
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var a = (t && t.closest) ? t.closest('a[href="#"][data-store-demo]') : null;
+    if (!a) return;
+    e.preventDefault();
+    showHint();
+  });
+
   /* ---- Reveal on scroll (progressive enhancement) ---- */
   var reveals = $$('.feature-card, .review-card, .step-card');
   if ('IntersectionObserver' in window) {
