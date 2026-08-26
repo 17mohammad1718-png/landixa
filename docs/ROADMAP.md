@@ -27,10 +27,11 @@ Goal: make the existing single page flawless. No new sections yet.
 
 ## Phase 2 — variants and extra pages (agent)
 Goal: replicate the "multiple home versions" value driver of APPER/Apdash.
-- [ ] Variant A (default, current): dark gradient
-- [ ] Variant B: light/minimal — `home-light.html`, shares style.css via
+- [x] Variant A (default, current): dark gradient
+- [x] Variant B: light/minimal — `home-light.html`, shares style.css via
       a `data-theme="light"` attribute + token overrides
-- [ ] Variant C: accent-shifted (e.g. warm) — `home-warm.html`
+- [x] Variant C: accent-shifted (e.g. warm) — `home-warm.html`
+      <!-- 2A DONE 1405/06/04: merged to main, self-check extended to 19 rules -->
 - [ ] `blog/index.html` — blog list (6 demo posts, Jalali dates)
 - [ ] `blog/post.html` — single post layout (text + image placeholder)
 - [ ] `ltr/` — English LTR twin of the main page (translate copy, flip
