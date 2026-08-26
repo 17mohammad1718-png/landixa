@@ -47,15 +47,16 @@
       <h1>اپلیکیشنت رو <span class="grad">درخشان</span> معرفی کن</h1>
       <p class="lead">«کیف من» همراه هوشمند مدیریت مالی شخصی؛ خرج‌هات رو ثبت کن، بودجه‌بندی کن و پس‌اندازت رو رشد بده — همه در یک اپ ساده و سریع.</p>
       <div class="store-buttons">
-        <a class="btn btn-store" href="#" aria-label="دریافت از کافه بازار">
+        <!-- placeholder links: replace each href with the real store / APK link -->
+        <a class="btn btn-store" href="#" data-store-demo aria-label="دریافت از کافه بازار">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 3l14 9L4 21V3z" fill="currentColor"/></svg>
           <span><small>دریافت از</small>کافه‌بازار</span>
         </a>
-        <a class="btn btn-store" href="#" aria-label="دریافت از مایکت">
+        <a class="btn btn-store" href="#" data-store-demo aria-label="دریافت از مایکت">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
           <span><small>دریافت از</small>مایکت</span>
         </a>
-        <a class="btn btn-store" href="#" aria-label="دانلود مستقیم فایل نصب">
+        <a class="btn btn-store" href="#" data-store-demo aria-label="دانلود مستقیم فایل نصب">
           <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
           <span><small>یا</small>دانلود مستقیم</span>
         </a>
@@ -68,19 +69,35 @@
     </div>
     <div class="hero-visual" aria-hidden="true">
       <div class="phone">
-        <div class="phone-notch"></div>
+        <div class="phone-notch"><span class="phone-cam"></span></div>
         <div class="phone-screen">
+          <div class="status-bar">
+            <span class="status-time">۱۲:۳۰</span>
+            <span class="status-icons">
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 18h3v-4H3v4zm5.5 0h3V9h-3v9zM14 18h3V5h-3v13zm5.5 0h3v-8h-3v8z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M2.5 9.5a14 14 0 0119 0M5.5 13a9.5 9.5 0 0113 0M8.6 16.4a5 5 0 016.8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="2" y="8" width="17" height="9" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M22 11v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="4.5" y="10.5" width="9" height="4" rx="1" fill="currentColor"/></svg>
+            </span>
+          </div>
           <div class="app-head">
             <span class="app-title">کیف من</span>
-            <span class="app-avatar"></span>
+            <span class="app-head-end">
+              <span class="app-bell">
+                <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M18 9a6 6 0 10-12 0c0 6.5-2.5 8-2.5 8h17S18 15.5 18 9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.3 20a2 2 0 003.4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="app-avatar"></span>
+            </span>
           </div>
           <div class="app-balance">
             <small>موجودی این ماه</small>
             <b><span class="en">12,480,000</span> <i>تومان</i></b>
-            <span class="chip chip-up">▲ <span class="en">18%</span> پس‌انداز بیشتر</span>
+            <span class="chip chip-up">
+              <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path d="M3 17l6-6 4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 7H20v5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="en">18%</span> پس‌انداز بیشتر
+            </span>
           </div>
           <div class="app-chart">
-            <svg viewBox="0 0 220 70" preserveAspectRatio="none">
+            <svg aria-hidden="true" viewBox="0 0 220 70" preserveAspectRatio="none">
               <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#22D3EE" stop-opacity=".5"/><stop offset="1" stop-color="#22D3EE" stop-opacity="0"/>
               </linearGradient></defs>
@@ -91,11 +108,30 @@
           <div class="app-row"><span class="dot dot-a"></span><div class="bar"><i style="inline-size:72%"></i></div><b>خوراک</b></div>
           <div class="app-row"><span class="dot dot-b"></span><div class="bar"><i style="inline-size:54%"></i></div><b>رفت‌وآمد</b></div>
           <div class="app-row"><span class="dot dot-c"></span><div class="bar"><i style="inline-size:33%"></i></div><b>تفریح</b></div>
-          <div class="app-nav"><span class="on"></span><span></span><span></span><span></span></div>
+          <div class="app-nav">
+            <span class="app-nav-btn on">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M3.5 10.5L12 3.5l8.5 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 9.5V20h13V9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-5.5h4V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="app-nav-btn">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5.5 19.5V11M12 19.5V4.5M18.5 19.5v-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <span class="app-fab">
+              <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="app-nav-btn">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><rect x="3" y="6.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 13h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+          </div>
         </div>
       </div>
-      <div class="float-chip fc-1">🔔 پرداخت موفق</div>
-      <div class="float-chip fc-2">🎯 هدف ماهانه رسید</div>
+      <div class="float-chip fc-1">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        پرداخت موفق
+      </div>
+      <div class="float-chip fc-2">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+        هدف ماهانه رسید
+      </div>
     </div>
   </div>
 </section>
@@ -109,32 +145,32 @@
     </div>
     <div class="features-grid">
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 6H9.5a3 3 0 000 6h5a3 3 0 010 6H6"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 6H9.5a3 3 0 000 6h5a3 3 0 010 6H6"/></svg></div>
         <h3>ثبت سریع خرج</h3>
         <p>خرج‌ها را در کمتر از سه ثانیه ثبت کن؛ دسته‌بندی هوشمند خودش کار را انجام می‌دهد.</p>
       </article>
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V9m5 10V4m5 15v-7m5 7V7"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V9m5 10V4m5 15v-7m5 7V7"/></svg></div>
         <h3>گزارش نموداری</h3>
         <p>روند خرج و پس‌انداز ماهانه را با نمودارهای زنده و قابل‌فهم ببین.</p>
       </article>
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
         <h3>یادآور قبض‌ها</h3>
         <p>دیگر هیچ سررسیدی از دستت در نمی‌رود؛ اپ خودش خبرت می‌کند.</p>
       </article>
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-4.6-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.4-9 9-9 9z"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-4.6-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.4-9 9-9 9z"/></svg></div>
         <h3>اهداف پس‌انداز</h3>
         <p>برای سفر، گوشی یا هر رویای دیگر هدف بساز و پیشرفتش را قدم‌به‌قدم ببین.</p>
       </article>
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
         <h3>امنیت بانکی</h3>
         <p>داده‌ها فقط روی دستگاه خودت می‌مانند؛ با رمز و اثر انگشت قفل می‌شود.</p>
       </article>
       <article class="feature-card">
-        <div class="feature-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 11-9-9"/><path d="M21 3l-9 9"/><path d="M15 3h6v6"/></svg></div>
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 11-9-9"/><path d="M21 3l-9 9"/><path d="M15 3h6v6"/></svg></div>
         <h3>همگام‌سازی ابری</h3>
         <p>دیتای تو بین گوشی و تبلت همیشه یکسان می‌ماند — بدون کار اضافه.</p>
       </article>
@@ -150,7 +186,7 @@
       <p>برای بزرگ‌شدن، روی هر اسکرین بزن.</p>
     </div>
     <div class="shots-scroll" tabindex="0" aria-label="گالری اسکرین‌شات — با اسکرول ببینید">
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="بزرگ‌نمایی: داشبورد اصلی">
         <div class="shot-screen">
           <b>خلاصه امروز</b>
           <span class="ln ln-a"></span><span class="ln ln-b"></span>
@@ -159,7 +195,7 @@
         </div>
         <figcaption class="shot-caption">داشبورد اصلی</figcaption>
       </figure>
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="بزرگ‌نمایی: ثبت سریع تراکنش">
         <div class="shot-screen alt">
           <b>ثبت خرج</b>
           <div class="shot-block"><span class="ln ln-a"></span><span class="ln ln-c"></span></div>
@@ -167,7 +203,7 @@
         </div>
         <figcaption class="shot-caption">ثبت سریع تراکنش</figcaption>
       </figure>
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="بزرگ‌نمایی: پیشرفت اهداف پس‌انداز">
         <div class="shot-screen">
           <b>اهداف من</b>
           <div class="shot-block"><b class="en">64%</b><span class="ln ln-d"></span></div>
@@ -175,15 +211,15 @@
         </div>
         <figcaption class="shot-caption">پیشرفت اهداف پس‌انداز</figcaption>
       </figure>
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="بزرگ‌نمایی: نمودار خرج ماهانه">
         <div class="shot-screen alt">
           <b>گزارش ماهانه</b>
-          <svg viewBox="0 0 120 60" style="inline-size:100%"><rect x="6" y="30" width="12" height="24" rx="3" fill="#22D3EE"/><rect x="26" y="20" width="12" height="34" rx="3" fill="#22D3EE"/><rect x="46" y="34" width="12" height="20" rx="3" fill="#33415E"/><rect x="66" y="12" width="12" height="42" rx="3" fill="#8B5CF6"/><rect x="86" y="24" width="12" height="30" rx="3" fill="#22D3EE"/></svg>
+          <svg aria-hidden="true" viewBox="0 0 120 60" style="inline-size:100%"><rect x="6" y="30" width="12" height="24" rx="3" fill="#22D3EE"/><rect x="26" y="20" width="12" height="34" rx="3" fill="#22D3EE"/><rect x="46" y="34" width="12" height="20" rx="3" fill="#33415E"/><rect x="66" y="12" width="12" height="42" rx="3" fill="#8B5CF6"/><rect x="86" y="24" width="12" height="30" rx="3" fill="#22D3EE"/></svg>
           <span class="ln ln-b"></span>
         </div>
         <figcaption class="shot-caption">نمودار خرج ماهانه</figcaption>
       </figure>
-      <figure class="shot" data-shot>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="بزرگ‌نمایی: سررسید قبض‌ها">
         <div class="shot-screen">
           <b>یادآورها</b>
           <div class="shot-block"><span class="ln ln-a"></span></div>
@@ -257,19 +293,19 @@
       <h2>هر سوالی داری اینجاست</h2>
     </div>
     <details class="faq-item">
-      <summary>اپ «کیف من» رایگانه؟<svg class="faq-chev" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <summary>اپ «کیف من» رایگانه؟<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
       <p>نسخه پایه کاملاً رایگانه. امکانات حرفه‌ای مثل گزارش نامحدود و همگام‌سازی ابری در اشتراک «کیف من پلاس» ارائه می‌شود.</p>
     </details>
     <details class="faq-item">
-      <summary>اطلاعات بانکی من امن می‌مونه؟<svg class="faq-chev" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <summary>اطلاعات بانکی من امن می‌مونه؟<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
       <p>بله. داده‌ها به‌صورت رمزنگاری‌شده فقط روی دستگاه شما ذخیره می‌شوند و هیچ اطلاعات حساسی روی سرور نگهداری نمی‌شود.</p>
     </details>
     <details class="faq-item">
-      <summary>با چه گوشی‌هایی سازگاره؟<svg class="faq-chev" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <summary>با چه گوشی‌هایی سازگاره؟<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
       <p>اندروید <span class="en">8+</span> و iOS <span class="en">13+</span>. روی تبلت هم رابط بهینه‌شده دارد.</p>
     </details>
     <details class="faq-item">
-      <summary>چطور اشتراک رو لغو کنم؟<svg class="faq-chev" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <summary>چطور اشتراک رو لغو کنم؟<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
       <p>از مسیر تنظیمات ← حساب کاربری ← مدیریت اشتراک، هر زمان بدون جریمه قابل لغو است.</p>
     </details>
   </div>
@@ -283,8 +319,9 @@
       <h2>همین حالا «کیف من» را دانلود کن</h2>
       <p>به بیش از <b class="en">50,000</b> کاربری بپیوند که مالی‌شان را سر و سامان داده‌اند.</p>
       <div class="store-buttons center">
-        <a class="btn btn-store light" href="#" aria-label="دریافت از کافه بازار"><span><small>دریافت از</small>کافه‌بازار</span></a>
-        <a class="btn btn-store light" href="#" aria-label="دریافت از مایکت"><span><small>دریافت از</small>مایکت</span></a>
+        <!-- placeholder links: replace each href with the real store link -->
+        <a class="btn btn-store light" href="#" data-store-demo aria-label="دریافت از کافه بازار"><span><small>دریافت از</small>کافه‌بازار</span></a>
+        <a class="btn btn-store light" href="#" data-store-demo aria-label="دریافت از مایکت"><span><small>دریافت از</small>مایکت</span></a>
       </div>
     </div>
     <div class="footer-bottom en">© 1405 Landixa Template — Crafted for rtl-theme.com</div>
