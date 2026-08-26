@@ -13,8 +13,9 @@ node tools/self-check.mjs
 ```
 
 Pure Node, **no dependencies, no `npm install`**. It reads every page
-(`index.html`, the two variant homes, the two blog pages),
-`assets/css/style.css` and `assets/js/main.js` and asserts every hard rule:
+(`index.html`, the two variant homes, the two blog pages, the English
+LTR twin), `assets/css/style.css` and `assets/js/main.js` and asserts
+every hard rule:
 
 - no external URLs / `@import` / CDN references (rules 1, 4)
 - every local `href` / `src` / `url()` exists on disk, resolved against the
@@ -28,6 +29,10 @@ Pure Node, **no dependencies, no `npm install`**. It reads every page
 - blog pages exist, are `dir=rtl lang=fa`, share the single
   `../assets/css/style.css` + `main.js`, carry no external/personal links,
   and their refs resolve from `blog/`
+- the LTR twin exists (`ltr/index.html`), is `lang=en dir=ltr`, shares the
+  single stylesheet + `main.js`, carries no external/personal links, its
+  anchors/refs resolve from `ltr/`, and it is fully translated (no
+  Arabic-script characters left)
 - accessibility inventory: decorative SVGs `aria-hidden`, nav-toggle ARIA
   triple, lightbox `role=dialog`/`aria-modal`/labelled close, shots are
   keyboard buttons, reduced-motion kill present (rule 9)

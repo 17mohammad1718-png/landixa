@@ -83,7 +83,7 @@ for (const [name, src] of Object.entries(files)) {
 ok('no personal links (github.com / t.me / mailto / telegram)',
    personal.length === 0, personal.join(' | '));
 const datePages = ['index.html', 'home-light.html', 'home-warm.html',
-  'blog/index.html', 'blog/post.html'].filter((p) => existsSync(path.join(REPO, p)));
+  'blog/index.html', 'blog/post.html', 'ltr/index.html'].filter((p) => existsSync(path.join(REPO, p)));
 const gregorian = [];
 for (const p of datePages) {
   const g = read(p).match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
@@ -195,6 +195,44 @@ for (const [p, src] of Object.entries(blogSources)) {
 }
 ok('blog pages: no external/personal links, refs resolve from blog/, svg aria-hidden',
    blogProblems.length === 0, blogProblems.join(' | '));
+
+/* ---- 10. LTR twin (Phase 2) ---- */
+const ltrPage = 'ltr/index.html';
+const ltrExists = existsSync(path.join(REPO, ltrPage));
+ok('ltr twin exists: ltr/index.html', ltrExists);
+const ltrSources = ltrExists ? { [ltrPage]: read(ltrPage) } : {};
+
+// en/ltr direction + the single shared stylesheet/script from the subfolder
+const ltrBadAssets = Object.entries(ltrSources).filter(([, src]) =>
+  !/<html[^>]+lang="en"[^>]+dir="ltr"/.test(src) ||
+  !/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src) ||
+  (src.match(/<link rel="stylesheet"/g) || []).length !== 1 ||
+  !/<script src="\.\.\/assets\/js\/main\.js" defer><\/script>/.test(src)
+).map(([p]) => p);
+ok('ltr twin: lang=en dir=ltr + shares ../assets/css/style.css + main.js',
+   ltrBadAssets.length === 0, ltrBadAssets.join(' '));
+
+// same hard rules + fully translated (no Arabic-script characters left)
+const ltrProblems = [];
+for (const [p, src] of Object.entries(ltrSources)) {
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) ltrProblems.push(`external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) ltrProblems.push(`missing files ${missing.join(', ')}`);
+  const idsL = new Set([...src.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const brkL = [...src.matchAll(/<a[^>]+href="#([^"]+)"/g)].map((m) => m[1])
+    .filter((a) => a !== '' && !idsL.has(a));
+  if (brkL.length) ltrProblems.push(`broken anchors ${brkL.join(', ')}`);
+  const svgL = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgL.length) ltrProblems.push(`${svgL.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) ltrProblems.push(`personal link ${pers[0]}`);
+  const fa = src.match(/[\u0600-\u06FF]/);
+  if (fa) ltrProblems.push(`Persian/Arabic characters present (translate fully) near "${fa[0]}"`);
+}
+ok('ltr twin: no external/personal links, refs resolve from ltr/, anchors resolve, svg aria-hidden, fully translated',
+   ltrProblems.length === 0, ltrProblems.join(' | '));
 
 /* ---- report ---- */
 let failed = 0;
