@@ -30,26 +30,30 @@
   /* text */
   --text:#E8EDF6;
   --muted:#93A0B8;
-  /* accent family */
+  /* accent family — buyers edit --accent/--accent-2 (and --on-accent);
+     tints, glows, shadows and the gradient derive via color-mix, so the
+     whole template stays in sync. color-mix: Chrome 111+/FF 113+/Safari 16.2+ */
   --accent:#22D3EE;
   --accent-2:#8B5CF6;
   --accent-2-bright:#A78BFA;
-  --grad:linear-gradient(135deg,#22D3EE,#8B5CF6);
   --on-accent:#07121A;
-  --accent-soft:rgba(34,211,238,.12);
-  --accent-2-soft:rgba(139,92,246,.12);
-  --accent-border:rgba(34,211,238,.35);
-  --accent-border-soft:rgba(34,211,238,.25);
-  --accent-2-border-soft:rgba(139,92,246,.25);
-  --glow-accent:rgba(34,211,238,.16);
-  --glow-accent-2:rgba(139,92,246,.14);
-  --app-grad:linear-gradient(135deg,rgba(34,211,238,.14),rgba(139,92,246,.14));
-  --shadow-accent:rgba(34,211,238,.45);
-  --shadow-accent-2:rgba(139,92,246,.55);
-  --shadow-accent-strong:rgba(34,211,238,.55);
+  --grad:linear-gradient(135deg,var(--accent),var(--accent-2));
+  --accent-soft:color-mix(in srgb,var(--accent) 12%,transparent);
+  --accent-2-soft:color-mix(in srgb,var(--accent-2) 12%,transparent);
+  --accent-border:color-mix(in srgb,var(--accent) 35%,transparent);
+  --accent-border-soft:color-mix(in srgb,var(--accent) 25%,transparent);
+  --accent-2-border-soft:color-mix(in srgb,var(--accent-2) 25%,transparent);
+  --glow-accent:color-mix(in srgb,var(--accent) 16%,transparent);
+  --glow-accent-2:color-mix(in srgb,var(--accent-2) 14%,transparent);
+  --app-grad:linear-gradient(135deg,
+    color-mix(in srgb,var(--accent) 14%,transparent),
+    color-mix(in srgb,var(--accent-2) 14%,transparent));
+  --shadow-accent:color-mix(in srgb,var(--accent) 45%,transparent);
+  --shadow-accent-2:color-mix(in srgb,var(--accent-2) 55%,transparent);
+  --shadow-accent-strong:color-mix(in srgb,var(--accent) 55%,transparent);
   /* semantic */
   --success:#34D399;
-  --success-soft:rgba(52,211,153,.15);
+  --success-soft:color-mix(in srgb,var(--success) 15%,transparent);
   --warn:#FBBF24;
   /* chrome */
   --header-bg:rgba(11,15,23,.82);
@@ -93,21 +97,8 @@ html[data-theme="light"]{
   --accent:#0E7490;
   --accent-2:#6D28D9;
   --accent-2-bright:#6D28D9;
-  --grad:linear-gradient(135deg,#0E7490,#6D28D9);
   --on-accent:#FFFFFF;
-  --accent-soft:rgba(14,116,144,.10);
-  --accent-2-soft:rgba(109,40,217,.10);
-  --accent-border:rgba(14,116,144,.40);
-  --accent-border-soft:rgba(14,116,144,.30);
-  --accent-2-border-soft:rgba(109,40,217,.30);
-  --glow-accent:rgba(14,116,144,.14);
-  --glow-accent-2:rgba(109,40,217,.12);
-  --app-grad:linear-gradient(135deg,rgba(14,116,144,.10),rgba(109,40,217,.10));
-  --shadow-accent:rgba(14,116,144,.35);
-  --shadow-accent-2:rgba(109,40,217,.35);
-  --shadow-accent-strong:rgba(14,116,144,.45);
   --success:#047857;
-  --success-soft:rgba(4,120,87,.12);
   --warn:#D97706;
   --header-bg:rgba(244,246,251,.82);
   --overlay:rgba(15,23,42,.55);
@@ -115,23 +106,15 @@ html[data-theme="light"]{
   --scroll-hover:#A9B7CE;
   --nav-idle:#8494AB;
   --data-idle:#C7D2E4;
+  /* accent tints/glows/shadows/gradient: inherited — they derive from
+     --accent/--accent-2 via color-mix in :root */
 }
 html[data-theme="warm"]{
   --accent:#FB923C;
   --accent-2:#F43F5E;
   --accent-2-bright:#FB7185;
-  --grad:linear-gradient(135deg,#FB923C,#F43F5E);
-  --accent-soft:rgba(251,146,60,.12);
-  --accent-2-soft:rgba(244,63,94,.12);
-  --accent-border:rgba(251,146,60,.35);
-  --accent-border-soft:rgba(251,146,60,.25);
-  --accent-2-border-soft:rgba(244,63,94,.25);
-  --glow-accent:rgba(251,146,60,.16);
-  --glow-accent-2:rgba(244,63,94,.14);
-  --app-grad:linear-gradient(135deg,rgba(251,146,60,.14),rgba(244,63,94,.14));
-  --shadow-accent:rgba(251,146,60,.45);
-  --shadow-accent-2:rgba(244,63,94,.55);
-  --shadow-accent-strong:rgba(251,146,60,.55);
+  /* everything else (dark base, tints, glows, gradient, shadows) is
+     inherited; accent tints derive from the new --accent/--accent-2 */
 }
 
 /* ---- Base / reset ---- */
