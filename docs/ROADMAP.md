@@ -13,17 +13,17 @@ Legend: [ ] todo · [x] done · (owner) = owner-only work
 - [x] DESIGN_SYSTEM.md written
 - [x] First commit pushed to main
 
-## Phase 1 — core template hardening (agent)
+## Phase 1 — core template hardening (agent) — DONE 1405/06/04
 Goal: make the existing single page flawless. No new sections yet.
-- [ ] Audit index.html: fix any broken anchor, missing aria-label,
+- [x] Audit index.html: fix any broken anchor, missing aria-label,
       non-logical CSS property (left/right → inline-start/end)
-- [ ] Verify all JS interactions (nav toggle, screenshot slider, FAQ
+- [x] Verify all JS interactions (nav toggle, screenshot slider, FAQ
       accordion, reveal-on-scroll) work with keyboard and reduced-motion
-- [ ] Check 320–1920px responsiveness; fix any overflow at 360px
-- [ ] Ensure zero network requests from file:// (fonts local, no CDN)
-- [ ] Polish hero phone mockup (pure CSS) — realistic status bar, notch,
+- [x] Check 320–1920px responsiveness; fix any overflow at 360px
+- [x] Ensure zero network requests from file:// (fonts local, no CDN)
+- [x] Polish hero phone mockup (pure CSS) — realistic status bar, notch,
       screen content for the demo app «کیف من»
-- [ ] Add `docs/screens/` note: where buyers drop their own screenshots
+- [x] Add `docs/screens/` note: where buyers drop their own screenshots
 
 ## Phase 2 — variants and extra pages (agent)
 Goal: replicate the "multiple home versions" value driver of APPER/Apdash.

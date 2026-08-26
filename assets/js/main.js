@@ -158,16 +158,18 @@
 
   /* ---- Demo store links: '#' placeholders must not jump to top ----
      If the buyer replaces the href with a real store URL the guard
-     no longer matches, so this is safe to leave in the shipped file. */
+     no longer matches, so this is safe to leave in the shipped file.
+     The toast text is customizable via data-toast on each link. */
   var hint = null;
-  function showHint() {
+  function showHint(a) {
     if (!hint) {
       hint = document.createElement('div');
       hint.className = 'toast';
       hint.setAttribute('role', 'status');
       document.body.appendChild(hint);
-      hint.textContent = 'لینک دمو — در نسخهٔ نهایی، href این دکمه را با لینک واقعی اپ خودتان جایگزین کنید.';
     }
+    var msg = a && a.getAttribute('data-toast');
+    hint.textContent = msg || 'لینک دمو — در نسخهٔ نهایی، href این دکمه را با لینک واقعی اپ خودتان جایگزین کنید.';
     hint.classList.remove('show');
     // restart the fade even if re-triggered while visible
     void hint.offsetWidth;
@@ -180,7 +182,7 @@
     var a = (t && t.closest) ? t.closest('a[href="#"][data-store-demo]') : null;
     if (!a) return;
     e.preventDefault();
-    showHint();
+    showHint(a);
   });
 
   /* ---- Reveal on scroll (progressive enhancement) ---- */
