@@ -92,6 +92,60 @@ ok('shots are keyboard buttons (tabindex + role + aria-label)',
 ok('reduced-motion kill present in CSS',
    css.includes('@media(prefers-reduced-motion:reduce)') && css.includes('animation:none'));
 
+/* ---- 8. variant pages (Phase 2A) ---- */
+const pages = ['index.html', 'home-light.html', 'home-warm.html'];
+const missingPages = pages.filter((p) => !existsSync(path.join(REPO, p)));
+ok('variant pages exist: home-light.html + home-warm.html',
+   missingPages.length === 0, missingPages.join(' '));
+const pageSources = {};
+for (const p of pages) if (existsSync(path.join(REPO, p))) pageSources[p] = read(p);
+
+// correct dir/lang + the right data-theme on every home page
+const themeAttr = (src) => (src.match(/<html[^>]*data-theme="([^"]+)"/) || [,''])[1];
+const pageThemes = { 'index.html': '', 'home-light.html': 'light', 'home-warm.html': 'warm' };
+const badThemes = Object.entries(pageThemes).filter(([p, want]) => {
+  const src = pageSources[p];
+  return !src || themeAttr(src) !== want ||
+    !/<html[^>]+lang="fa"[^>]+dir="rtl"/.test(src);
+}).map(([p]) => p);
+ok('every home page: dir=rtl lang=fa + correct data-theme (default/light/warm)',
+   badThemes.length === 0, badThemes.join(' '));
+
+// every data-theme used must have a token-override block in the shared CSS
+const cssThemes = new Set([...css.matchAll(/html\[data-theme="([^"]+)"\]\{/g)].map((m) => m[1]));
+const missingCssThemes = [...new Set(Object.values(pageThemes).filter(Boolean))]
+  .filter((t) => !cssThemes.has(t));
+ok('each data-theme has a token-override block in style.css',
+   missingCssThemes.length === 0, missingCssThemes.join(' '));
+
+// variant pages obey the same hard rules as index
+const pageProblems = [];
+for (const [p, src] of Object.entries(pageSources)) {
+  if (p === 'index.html') continue; // covered by checks 1-7 above
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) pageProblems.push(`${p}: external refs ${ext.join(', ')}`);
+  const ids2 = new Set([...src.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const brk = [...src.matchAll(/<a[^>]+href="#([^"]+)"/g)].map((m) => m[1])
+    .filter((a) => a !== '' && !ids2.has(a));
+  if (brk.length) pageProblems.push(`${p}: broken anchors ${brk.join(', ')}`);
+  const missingRefs = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !r.startsWith('#') && !r.startsWith('data:') &&
+      !existsSync(path.join(REPO, r)));
+  if (missingRefs.length) pageProblems.push(`${p}: missing files ${missingRefs.join(', ')}`);
+  const svgNoHide2 = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgNoHide2.length) pageProblems.push(`${p}: ${svgNoHide2.length} svg without aria-hidden`);
+}
+ok('variant pages: no external refs, files exist, anchors resolve, svg aria-hidden',
+   pageProblems.length === 0, pageProblems.join(' | '));
+
+// variants must share the single style.css + main.js (no per-variant css)
+const shared = Object.entries(pageSources).filter(([p]) => p !== 'index.html').every(([, src]) =>
+  /<link rel="stylesheet" href="assets\/css\/style\.css">/.test(src) &&
+  /<script src="assets\/js\/main\.js" defer><\/script>/.test(src) &&
+  (src.match(/<link rel="stylesheet"/g) || []).length === 1);
+ok('variant pages share assets/css/style.css + main.js (one stylesheet each)',
+   shared);
+
 /* ---- report ---- */
 let failed = 0;
 for (const r of results) {
