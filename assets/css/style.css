@@ -117,12 +117,24 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
   padding:12px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);position:relative;z-index:1;
   animation:floaty 6s ease-in-out infinite}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-.phone-notch{position:absolute;top:22px;inset-inline-start:50%;transform:translateX(-50%);
-  width:110px;height:22px;background:#10151F;border-radius:999px;z-index:2}
-.phone-screen{background:var(--bg-soft);border-radius:30px;padding:44px 16px 16px;display:flex;
-  flex-direction:column;gap:12px;min-height:520px}
+.phone-notch{position:absolute;top:18px;inset-inline-start:50%;transform:translateX(-50%);
+  width:104px;height:24px;background:#05070C;border-radius:999px;z-index:2}
+.phone-cam{position:absolute;inset-inline-end:12px;top:50%;transform:translateY(-50%);
+  width:7px;height:7px;border-radius:50%;background:#0B1220;
+  box-shadow:inset 0 0 3px rgba(90,130,255,.55),0 0 0 1px #1B2740}
+.phone-screen{background:var(--bg-soft);border-radius:30px;padding:0 14px 12px;display:flex;
+  flex-direction:column;gap:12px;min-height:520px;overflow:hidden}
+/* realistic status bar: time on the inline-start (reading-order) side,
+   signal/wifi/battery on the other — flips automatically with dir */
+.status-bar{display:flex;align-items:center;justify-content:space-between;
+  padding-block:12px 2px;font-size:.7rem;color:var(--text)}
+.status-time{font-weight:700}
+.status-icons{display:flex;align-items:center;gap:5px}
 .app-head{display:flex;align-items:center;justify-content:space-between}
 .app-title{font-weight:800;font-size:1rem}
+.app-head-end{display:flex;align-items:center;gap:8px}
+.app-bell{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;
+  background:var(--card);color:var(--muted)}
 .app-avatar{width:30px;height:30px;border-radius:50%;background:var(--grad)}
 .app-balance{background:linear-gradient(135deg,rgba(34,211,238,.14),rgba(139,92,246,.14));
   border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;display:flex;
@@ -131,7 +143,8 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
 .app-balance b{font-size:1.05rem}
 .app-balance i{font-style:normal;font-size:.72rem;color:var(--muted)}
 .chip{align-self:flex-start;border-radius:999px;padding:2px 10px;font-size:.7rem}
-.chip-up{background:rgba(52,211,153,.15);color:#34D399}
+.chip-up{display:inline-flex;align-items:center;gap:5px;
+  background:rgba(52,211,153,.15);color:#34D399}
 .app-chart{background:var(--card);border-radius:var(--radius-sm);padding:8px;height:86px}
 .app-chart svg{width:100%;height:100%}
 .app-row{display:flex;align-items:center;gap:10px;background:var(--card);
@@ -140,12 +153,20 @@ html{scrollbar-color:#2A3650 var(--bg);scrollbar-width:thin}
 .dot-a{background:#22D3EE}.dot-b{background:#8B5CF6}.dot-c{background:#F59E0B}
 .bar{flex:1;height:6px;background:#232E44;border-radius:99px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--grad);border-radius:99px}
-.app-nav{margin-top:auto;display:flex;justify-content:space-around;padding-block:8px;
-  border-top:1px solid var(--border)}
-.app-nav span{width:8px;height:8px;border-radius:50%;background:#3A4869}
-.app-nav .on{background:var(--accent)}
-.float-chip{position:absolute;background:var(--card-2);border:1px solid var(--border);
+/* bottom tab bar with a floating action button (pure CSS/SVG) */
+.app-nav{margin-top:auto;display:flex;align-items:center;justify-content:space-around;
+  padding-block:10px 4px;border-top:1px solid var(--border)}
+.app-nav-btn{display:grid;place-items:center;width:24px;height:24px;color:#5A6B8C}
+.app-nav-btn.on{color:var(--accent)}
+.app-fab{width:44px;height:44px;border-radius:50%;background:var(--grad);color:#07121A;
+  display:grid;place-items:center;margin-block:-22px;border:5px solid var(--bg-soft);
+  box-shadow:0 10px 22px -6px rgba(34,211,238,.55)}
+.float-chip{position:absolute;display:flex;align-items:center;gap:7px;
+  background:var(--card-2);border:1px solid var(--border);
   border-radius:12px;padding:8px 14px;font-size:.82rem;box-shadow:0 12px 28px -10px rgba(0,0,0,.55);z-index:2}
+.float-chip svg{flex:0 0 auto}
+.fc-1 svg{color:#34D399}
+.fc-2 svg{color:var(--accent)}
 .fc-1{top:16%;inset-inline-end:-4%;animation:floaty 7s ease-in-out infinite}
 .fc-2{bottom:14%;inset-inline-start:-6%;animation:floaty 8s ease-in-out infinite reverse}
 
