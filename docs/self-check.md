@@ -33,6 +33,9 @@ every hard rule:
   single stylesheet + `main.js`, carries no external/personal links, its
   anchors/refs resolve from `ltr/`, and it is fully translated (no
   Arabic-script characters left)
+- marketing sources exist (`marketing/`: icon 320×320, cover 2100×1040,
+  infographic — pure HTML/CSS, no AI images), share the single
+  `../assets/css/style.css`, and carry no external/personal refs
 - accessibility inventory: decorative SVGs `aria-hidden`, nav-toggle ARIA
   triple, lightbox `role=dialog`/`aria-modal`/labelled close, shots are
   keyboard buttons, reduced-motion kill present (rule 9)

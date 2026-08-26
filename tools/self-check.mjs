@@ -83,7 +83,9 @@ for (const [name, src] of Object.entries(files)) {
 ok('no personal links (github.com / t.me / mailto / telegram)',
    personal.length === 0, personal.join(' | '));
 const datePages = ['index.html', 'home-light.html', 'home-warm.html',
-  'blog/index.html', 'blog/post.html', 'ltr/index.html'].filter((p) => existsSync(path.join(REPO, p)));
+  'blog/index.html', 'blog/post.html', 'ltr/index.html',
+  'marketing/icon.html', 'marketing/cover.html', 'marketing/infographic.html']
+  .filter((p) => existsSync(path.join(REPO, p)));
 const gregorian = [];
 for (const p of datePages) {
   const g = read(p).match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
@@ -233,6 +235,30 @@ for (const [p, src] of Object.entries(ltrSources)) {
 }
 ok('ltr twin: no external/personal links, refs resolve from ltr/, anchors resolve, svg aria-hidden, fully translated',
    ltrProblems.length === 0, ltrProblems.join(' | '));
+
+/* ---- 11. marketing sources (Phase 3) ---- */
+const marketingPages = ['marketing/icon.html', 'marketing/cover.html', 'marketing/infographic.html'];
+const missingMkt = marketingPages.filter((p) => !existsSync(path.join(REPO, p)));
+ok('marketing sources exist: icon 320×320 + cover 2100×1040 + infographic (pure HTML/CSS, no AI images)',
+   missingMkt.length === 0, missingMkt.join(' '));
+const mktProblems = [];
+for (const p of marketingPages) {
+  if (!existsSync(path.join(REPO, p))) continue;
+  const src = read(p);
+  if (!/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src))
+    mktProblems.push(`${p}: does not share ../assets/css/style.css`);
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) mktProblems.push(`${p}: external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) mktProblems.push(`${p}: missing files ${missing.join(', ')}`);
+  const svgM = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgM.length) mktProblems.push(`${p}: ${svgM.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) mktProblems.push(`${p}: personal link ${pers[0]}`);
+}
+ok('marketing sources: share ../assets/css/style.css, no external/personal refs, svg aria-hidden',
+   mktProblems.length === 0, mktProblems.join(' | '));
 
 /* ---- report ---- */
 let failed = 0;
