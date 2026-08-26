@@ -288,11 +288,11 @@ html{scrollbar-color:var(--scroll) var(--bg);scrollbar-width:thin}
 /* real screenshots dropped in by buyers (see docs/screens/README.md) */
 .shot-screen img{inline-size:100%;block-size:100%;object-fit:cover}
 .shot-screen b{font-size:.95rem}
-.shot-screen .ln{height:8px;border-radius:99px;background:var(--line)}
+.shot-screen .ln,.post-cover .ln{height:8px;border-radius:99px;background:var(--line)}
 .ln-a{inline-size:85%}.ln-b{inline-size:65%}.ln-c{inline-size:74%}.ln-d{inline-size:50%}
 .shot-block{border-radius:12px;background:var(--accent-soft);border:1px solid var(--accent-border-soft);
   padding:10px;display:flex;flex-direction:column;gap:7px}
-.shot-screen.alt .shot-block{background:var(--accent-2-soft);border-color:var(--accent-2-border-soft)}
+.shot-screen.alt .shot-block,.post-cover.alt .shot-block{background:var(--accent-2-soft);border-color:var(--accent-2-border-soft)}
 .shot-caption{padding:10px 14px;font-size:.82rem;color:var(--muted);text-align:center}
 
 /* lightbox */
@@ -350,6 +350,52 @@ html{scrollbar-color:var(--scroll) var(--bg);scrollbar-width:thin}
 .faq-item[open] summary{color:var(--accent)}
 .faq-item p{padding:0 20px 18px;color:var(--muted);font-size:.94rem}
 
+/* ---- Blog (Phase 2B): page hero, post cards, single post ---- */
+.page-hero{position:relative;overflow:hidden;padding-block:72px 20px;text-align:center}
+.page-hero::before{content:'';position:absolute;inset-inline-start:-140px;top:-140px;width:520px;height:520px;
+  background:radial-gradient(circle,var(--glow-accent),transparent 65%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;inset-inline-end:-160px;top:-100px;width:480px;height:480px;
+  background:radial-gradient(circle,var(--glow-accent-2),transparent 65%);pointer-events:none}
+.page-hero h1{font-size:clamp(1.9rem,4.2vw,3.1rem);font-weight:800;line-height:1.5;margin-block-end:12px}
+.page-hero .lead{margin-inline:auto}
+
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+/* the whole card is the link — keyboard focusable, hover lift like .feature-card */
+.post-card{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.post-card:hover{transform:translateY(-4px);border-color:var(--hover-border);
+  box-shadow:0 18px 40px -20px var(--shadow-accent)}
+/* pure-CSS cover placeholder — same pattern as .shot-screen (no images) */
+.post-cover{aspect-ratio:16/10;display:flex;flex-direction:column;gap:10px;padding:16px;
+  background:linear-gradient(160deg,var(--card-2),var(--bg-soft));border-block-end:1px solid var(--border)}
+.post-cover b{font-size:.9rem;line-height:1.6}
+.post-body{flex:1;display:flex;flex-direction:column;gap:10px;padding:18px 20px 22px}
+.post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;color:var(--muted);font-size:.8rem}
+.post-chip{display:inline-flex;align-items:center;background:var(--accent-soft);
+  border:1px solid var(--accent-border);color:var(--accent);border-radius:999px;
+  padding:2px 12px;font-size:.74rem;font-weight:700}
+.post-title{font-size:1.08rem;font-weight:700;line-height:1.7}
+.post-excerpt{color:var(--muted);font-size:.92rem;display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;line-clamp:2;overflow:hidden}
+
+/* single post (blog/post.html) */
+.post-layout{max-width:780px;margin-inline:auto}
+.post-layout h1{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:800;line-height:1.6;margin-block:20px 14px}
+.post-layout .post-cover{margin-block-start:26px}
+.breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:2px;list-style:none;
+  font-size:.85rem;color:var(--muted)}
+/* separator points forward in reading order (RTL-aware, like .step-card) */
+.breadcrumb li:not(:last-child)::after{content:'‹';margin-inline:10px;color:var(--muted)}
+[dir="ltr"] .breadcrumb li:not(:last-child)::after{content:'›'}
+.breadcrumb a{color:var(--muted);transition:color .15s ease}
+.breadcrumb a:hover{color:var(--accent)}
+.post-content{display:flex;flex-direction:column;gap:20px;margin-block-start:28px;font-size:1.02rem}
+.post-content h2{font-size:clamp(1.25rem,2.6vw,1.5rem);font-weight:800;line-height:1.7;margin-block-start:10px}
+.post-content blockquote{border-inline-start:3px solid var(--accent);background:var(--accent-soft);
+  border-radius:var(--radius-sm);padding:18px 22px;font-weight:600;line-height:2}
+
+
 /* ---- Final CTA + Footer ---- */
 .site-footer{padding-block:80px 30px;background:
   radial-gradient(60% 90% at 50% 0%,var(--accent-2-soft),transparent 70%),var(--bg-soft);
@@ -368,7 +414,7 @@ html{scrollbar-color:var(--scroll) var(--bg);scrollbar-width:thin}
   .hero-grid{grid-template-columns:1fr;text-align:center}
   .hero-copy{display:flex;flex-direction:column;align-items:center}
   .lead{margin-inline:auto}
-  .features-grid,.reviews-grid{grid-template-columns:repeat(2,1fr)}
+  .features-grid,.reviews-grid,.blog-grid{grid-template-columns:repeat(2,1fr)}
   .steps-grid{grid-template-columns:1fr;max-width:440px}
 }
 @media(min-width:769px) and (max-width:900px){
@@ -384,6 +430,7 @@ html{scrollbar-color:var(--scroll) var(--bg);scrollbar-width:thin}
   .nav-toggle{display:flex}
   .header-actions .btn{display:none}  /* hero store buttons are immediately visible below */
   .hero{padding-block:48px 40px}
+  .page-hero{padding-block:48px 12px}
   .section{padding-block:56px}
   .float-chip{display:none}
   .fc-1{inset-inline-end:0}.fc-2{inset-inline-start:0}
@@ -391,7 +438,7 @@ html{scrollbar-color:var(--scroll) var(--bg);scrollbar-width:thin}
   .hero-stats{gap:22px}
 }
 @media(max-width:560px){
-  .features-grid,.reviews-grid{grid-template-columns:1fr}
+  .features-grid,.reviews-grid,.blog-grid{grid-template-columns:1fr}
 }
 @media(max-width:480px){
   .container{padding-inline:16px}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>لندیکسا — آیکون ۳۲۰×۳۲۰ (منبع export)</title>
+<!-- marketing source: hand-built HTML/CSS only, NO AI images (marketplace ban).
+     Export: see marketing/README.md — chrome --headless --screenshot=icon.png --window-size=320,320 -->
+<link rel="stylesheet" href="../assets/css/style.css">
+<style>
+  /* fixed export canvas — exact size is the deliverable */
+  html{font-size:16px}
+  body{width:320px;height:320px;margin:0;overflow:hidden}
+  .stage{position:relative;inline-size:100%;block-size:100%;display:grid;place-items:center;
+    background:var(--bg);overflow:hidden}
+  .stage::before{content:'';position:absolute;inset-inline-start:-70px;top:-70px;width:260px;height:260px;
+    background:radial-gradient(circle,var(--glow-accent),transparent 65%)}
+  .stage::after{content:'';position:absolute;inset-inline-end:-80px;bottom:-80px;width:280px;height:280px;
+    background:radial-gradient(circle,var(--glow-accent-2),transparent 65%)}
+  .icon-lockup{position:relative;text-align:center}
+  .name{font-weight:800;font-size:1.8rem;margin-block-start:12px;color:var(--text)}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="icon-lockup">
+    <svg viewBox="0 0 32 32" width="126" height="126" aria-hidden="true">
+      <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" style="stop-color:var(--accent-2)"/>
+      </linearGradient></defs>
+      <rect x="2" y="2" width="28" height="28" rx="9" fill="url(#lg)"/>
+      <path d="M10 21.5V10.5h3.1v8.2H22v2.8z" style="fill:var(--on-accent)"/>
+    </svg>
+    <div class="name">لندیکسا</div>
+  </div>
+</div>
+</body>
+</html>

@@ -30,14 +30,24 @@ for (const [name, src] of Object.entries(files)) {
 ok('no external URLs / @import / CDN references in html+css+js',
    external.length === 0, external.join(' | '));
 
-/* ---- 2. every referenced local file exists ---- */
-const localRefs = new Set(); // resolved repo-relative paths
+/* ---- 2. every referenced local file exists ----
+   Refs resolve the way a browser resolves them: against the PAGE'S OWN
+   directory (a url() against the css file's dir), never against the repo
+   root — so ../assets/... inside a subfolder page (blog/) resolves. */
+const resolveFrom = (page, ref) =>
+  path.posix.normalize(path.posix.join(path.posix.dirname(page), ref));
+const refOnDisk = (page, ref) => {
+  if (ref.startsWith('#') || ref.startsWith('data:')) return true; // fragment / inline data
+  const file = ref.split('#')[0].split('?')[0]; // strip fragment + query
+  if (!file || /^(https?:)?\/\//i.test(file)) return true; // external: check 1's job
+  return existsSync(path.join(REPO, resolveFrom(page, file)));
+};
+const localRefs = new Set(); // refs as written in index.html (+ css url()s normalized)
 for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) localRefs.add(m[1]);
 for (const m of css.matchAll(/url\(['"]?([^'")]+)['"]?\)/g)) {
-  localRefs.add(path.posix.normalize('assets/css/' + m[1]));
+  localRefs.add(path.posix.normalize('assets/css/' + m[1])); // url() resolves from assets/css/
 }
-const brokenRefs = [...localRefs].filter((r) =>
-  !r.startsWith('#') && !r.startsWith('data:') && !existsSync(path.join(REPO, r)));
+const brokenRefs = [...localRefs].filter((r) => !refOnDisk('index.html', r));
 ok('all local href/src/url() references exist on disk',
    brokenRefs.length === 0, brokenRefs.join(' | '));
 
@@ -72,8 +82,17 @@ for (const [name, src] of Object.entries(files)) {
 }
 ok('no personal links (github.com / t.me / mailto / telegram)',
    personal.length === 0, personal.join(' | '));
-const gregorian = html.match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
-ok('no Gregorian-style dates in the page', !gregorian, gregorian);
+const datePages = ['index.html', 'home-light.html', 'home-warm.html',
+  'blog/index.html', 'blog/post.html', 'ltr/index.html',
+  'marketing/icon.html', 'marketing/cover.html', 'marketing/infographic.html']
+  .filter((p) => existsSync(path.join(REPO, p)));
+const gregorian = [];
+for (const p of datePages) {
+  const g = read(p).match(/20\d{2}[-/]\d{1,2}[-/]\d{1,2}/);
+  if (g) gregorian.push(`${p}: ${g[0]}`);
+}
+ok('no Gregorian-style dates on any page (Jalali only)',
+   gregorian.length === 0, gregorian.join(' | '));
 
 /* ---- 7. accessibility inventory (rule 9) ---- */
 const svgNoHide = [...html.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
@@ -129,8 +148,7 @@ for (const [p, src] of Object.entries(pageSources)) {
     .filter((a) => a !== '' && !ids2.has(a));
   if (brk.length) pageProblems.push(`${p}: broken anchors ${brk.join(', ')}`);
   const missingRefs = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
-    .filter((r) => !r.startsWith('#') && !r.startsWith('data:') &&
-      !existsSync(path.join(REPO, r)));
+    .filter((r) => !refOnDisk(p, r));
   if (missingRefs.length) pageProblems.push(`${p}: missing files ${missingRefs.join(', ')}`);
   const svgNoHide2 = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
   if (svgNoHide2.length) pageProblems.push(`${p}: ${svgNoHide2.length} svg without aria-hidden`);
@@ -145,6 +163,102 @@ const shared = Object.entries(pageSources).filter(([p]) => p !== 'index.html').e
   (src.match(/<link rel="stylesheet"/g) || []).length === 1);
 ok('variant pages share assets/css/style.css + main.js (one stylesheet each)',
    shared);
+
+/* ---- 9. blog pages (Phase 2B) ---- */
+const blogPages = ['blog/index.html', 'blog/post.html'];
+const missingBlog = blogPages.filter((p) => !existsSync(path.join(REPO, p)));
+ok('blog pages exist: blog/index.html + blog/post.html',
+   missingBlog.length === 0, missingBlog.join(' '));
+const blogSources = {};
+for (const p of blogPages) if (existsSync(path.join(REPO, p))) blogSources[p] = read(p);
+
+// rtl + the single shared stylesheet/script from the subfolder
+const blogBadAssets = Object.entries(blogSources).filter(([, src]) =>
+  !/<html[^>]+lang="fa"[^>]+dir="rtl"/.test(src) ||
+  !/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src) ||
+  (src.match(/<link rel="stylesheet"/g) || []).length !== 1 ||
+  !/<script src="\.\.\/assets\/js\/main\.js" defer><\/script>/.test(src)
+).map(([p]) => p);
+ok('blog pages: dir=rtl lang=fa + share ../assets/css/style.css + main.js',
+   blogBadAssets.length === 0, blogBadAssets.join(' '));
+
+// same hard rules as the home pages, refs resolved from the page's own dir
+const blogProblems = [];
+for (const [p, src] of Object.entries(blogSources)) {
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) blogProblems.push(`${p}: external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) blogProblems.push(`${p}: missing files ${missing.join(', ')}`);
+  const svgNoHideBlog = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgNoHideBlog.length) blogProblems.push(`${p}: ${svgNoHideBlog.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) blogProblems.push(`${p}: personal link ${pers[0]}`);
+}
+ok('blog pages: no external/personal links, refs resolve from blog/, svg aria-hidden',
+   blogProblems.length === 0, blogProblems.join(' | '));
+
+/* ---- 10. LTR twin (Phase 2) ---- */
+const ltrPage = 'ltr/index.html';
+const ltrExists = existsSync(path.join(REPO, ltrPage));
+ok('ltr twin exists: ltr/index.html', ltrExists);
+const ltrSources = ltrExists ? { [ltrPage]: read(ltrPage) } : {};
+
+// en/ltr direction + the single shared stylesheet/script from the subfolder
+const ltrBadAssets = Object.entries(ltrSources).filter(([, src]) =>
+  !/<html[^>]+lang="en"[^>]+dir="ltr"/.test(src) ||
+  !/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src) ||
+  (src.match(/<link rel="stylesheet"/g) || []).length !== 1 ||
+  !/<script src="\.\.\/assets\/js\/main\.js" defer><\/script>/.test(src)
+).map(([p]) => p);
+ok('ltr twin: lang=en dir=ltr + shares ../assets/css/style.css + main.js',
+   ltrBadAssets.length === 0, ltrBadAssets.join(' '));
+
+// same hard rules + fully translated (no Arabic-script characters left)
+const ltrProblems = [];
+for (const [p, src] of Object.entries(ltrSources)) {
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) ltrProblems.push(`external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) ltrProblems.push(`missing files ${missing.join(', ')}`);
+  const idsL = new Set([...src.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]));
+  const brkL = [...src.matchAll(/<a[^>]+href="#([^"]+)"/g)].map((m) => m[1])
+    .filter((a) => a !== '' && !idsL.has(a));
+  if (brkL.length) ltrProblems.push(`broken anchors ${brkL.join(', ')}`);
+  const svgL = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgL.length) ltrProblems.push(`${svgL.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) ltrProblems.push(`personal link ${pers[0]}`);
+  const fa = src.match(/[\u0600-\u06FF]/);
+  if (fa) ltrProblems.push(`Persian/Arabic characters present (translate fully) near "${fa[0]}"`);
+}
+ok('ltr twin: no external/personal links, refs resolve from ltr/, anchors resolve, svg aria-hidden, fully translated',
+   ltrProblems.length === 0, ltrProblems.join(' | '));
+
+/* ---- 11. marketing sources (Phase 3) ---- */
+const marketingPages = ['marketing/icon.html', 'marketing/cover.html', 'marketing/infographic.html'];
+const missingMkt = marketingPages.filter((p) => !existsSync(path.join(REPO, p)));
+ok('marketing sources exist: icon 320×320 + cover 2100×1040 + infographic (pure HTML/CSS, no AI images)',
+   missingMkt.length === 0, missingMkt.join(' '));
+const mktProblems = [];
+for (const p of marketingPages) {
+  if (!existsSync(path.join(REPO, p))) continue;
+  const src = read(p);
+  if (!/<link rel="stylesheet" href="\.\.\/assets\/css\/style\.css">/.test(src))
+    mktProblems.push(`${p}: does not share ../assets/css/style.css`);
+  const ext = src.match(/https?:\/\/[^\s"'()<>]+|@import\b|cdn\./gi);
+  if (ext) mktProblems.push(`${p}: external refs ${ext.join(', ')}`);
+  const missing = [...src.matchAll(/(?:href|src)="([^"]+)"/g)].map((m) => m[1])
+    .filter((r) => !refOnDisk(p, r));
+  if (missing.length) mktProblems.push(`${p}: missing files ${missing.join(', ')}`);
+  const svgM = [...src.matchAll(/<svg(?![^>]*aria-hidden)[^>]*>/g)];
+  if (svgM.length) mktProblems.push(`${p}: ${svgM.length} svg without aria-hidden`);
+  const pers = src.match(/github\.com|t\.me\/|mailto:|telegram/i);
+  if (pers) mktProblems.push(`${p}: personal link ${pers[0]}`);
+}
+ok('marketing sources: share ../assets/css/style.css, no external/personal refs, svg aria-hidden',
+   mktProblems.length === 0, mktProblems.join(' | '));
 
 /* ---- report ---- */
 let failed = 0;

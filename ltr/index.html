@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landixa | App Landing Page HTML Template</title>
+<meta name="description" content="The English LTR edition of the Landixa app-landing HTML template — fast, responsive and completely dependency-free">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Landixa">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="34" height="34" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" style="stop-color:var(--accent)"/><stop offset="1" style="stop-color:var(--accent-2)"/>
+        </linearGradient></defs>
+        <rect x="2" y="2" width="28" height="28" rx="9" fill="url(#lg)"/>
+        <path d="M10 21.5V10.5h3.1v8.2H22v2.8z" style="fill:var(--on-accent)"/>
+      </svg>
+      <span class="brand-name">Landixa</span>
+    </a>
+    <nav class="main-nav" id="mainNav" aria-label="Main menu">
+      <a href="#features">Features</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#how">How it works</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-primary btn-sm" href="#download">Get the app</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Open and close the menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="hero-badge">v2.0 just released</span>
+      <h1>Put your app in the <span class="grad">spotlight</span></h1>
+      <p class="lead">MyWallet is a smart companion for personal finance: log expenses in seconds, budget with confidence and grow your savings — all in one fast, simple app.</p>
+      <div class="store-buttons">
+        <!-- placeholder links: replace each href with the real store / APK link -->
+        <a class="btn btn-store" href="#" data-store-demo data-toast="Demo link — in the final version, replace this button's href with your app's real store link." aria-label="Get it on Cafe Bazaar">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 3l14 9L4 21V3z" fill="currentColor"/></svg>
+          <span><small>Get it on</small>Cafe Bazaar</span>
+        </a>
+        <a class="btn btn-store" href="#" data-store-demo data-toast="Demo link — in the final version, replace this button's href with your app's real store link." aria-label="Get it on Myket">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>
+          <span><small>Get it on</small>Myket</span>
+        </a>
+        <a class="btn btn-store" href="#" data-store-demo data-toast="Demo link — in the final version, replace this button's href with your app's real APK link." aria-label="Download the install file directly">
+          <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span><small>or</small>Direct download</span>
+        </a>
+      </div>
+      <ul class="hero-stats">
+        <li><b>50K+</b><span>Active downloads</span></li>
+        <li><b>4.8<i>/5</i></b><span>User rating</span></li>
+        <li><b>12K+</b><span>Written reviews</span></li>
+      </ul>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="phone">
+        <div class="phone-notch"><span class="phone-cam"></span></div>
+        <div class="phone-screen">
+          <div class="status-bar">
+            <span class="status-time">12:30</span>
+            <span class="status-icons">
+              <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M3 18h3v-4H3v4zm5.5 0h3V9h-3v9zM14 18h3V5h-3v13zm5.5 0h3v-8h-3v8z" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M2.5 9.5a14 14 0 0119 0M5.5 13a9.5 9.5 0 0113 0M8.6 16.4a5 5 0 016.8 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="currentColor"/></svg>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="2" y="8" width="17" height="9" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M22 11v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="4.5" y="10.5" width="9" height="4" rx="1" fill="currentColor"/></svg>
+            </span>
+          </div>
+          <div class="app-head">
+            <span class="app-title">MyWallet</span>
+            <span class="app-head-end">
+              <span class="app-bell">
+                <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M18 9a6 6 0 10-12 0c0 6.5-2.5 8-2.5 8h17S18 15.5 18 9z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10.3 20a2 2 0 003.4 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              </span>
+              <span class="app-avatar"></span>
+            </span>
+          </div>
+          <div class="app-balance">
+            <small>Balance this month</small>
+            <b>12,480,000 <i>Toman</i></b>
+            <span class="chip chip-up">
+              <svg viewBox="0 0 24 24" width="11" height="11" aria-hidden="true"><path d="M3 17l6-6 4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14.5 7H20v5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              18% more savings
+            </span>
+          </div>
+          <div class="app-chart">
+            <svg aria-hidden="true" viewBox="0 0 220 70" preserveAspectRatio="none">
+              <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" style="stop-color:var(--accent)" stop-opacity=".5"/><stop offset="1" style="stop-color:var(--accent)" stop-opacity="0"/>
+              </linearGradient></defs>
+              <path d="M0 55 L30 48 L60 52 L90 38 L120 42 L150 26 L180 30 L220 14 L220 70 L0 70 Z" fill="url(#cg)"/>
+              <path d="M0 55 L30 48 L60 52 L90 38 L120 42 L150 26 L180 30 L220 14" fill="none" style="stroke:var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="app-row"><span class="dot dot-a"></span><div class="bar"><i style="inline-size:72%"></i></div><b>Food</b></div>
+          <div class="app-row"><span class="dot dot-b"></span><div class="bar"><i style="inline-size:54%"></i></div><b>Transport</b></div>
+          <div class="app-row"><span class="dot dot-c"></span><div class="bar"><i style="inline-size:33%"></i></div><b>Leisure</b></div>
+          <div class="app-nav">
+            <span class="app-nav-btn on">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M3.5 10.5L12 3.5l8.5 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 9.5V20h13V9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 20v-5.5h4V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="app-nav-btn">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><path d="M5.5 19.5V11M12 19.5V4.5M18.5 19.5v-6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            </span>
+            <span class="app-fab">
+              <svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+            <span class="app-nav-btn">
+              <svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><rect x="3" y="6.5" width="18" height="13" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 13h2.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="float-chip fc-1">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Payment successful
+      </div>
+      <div class="float-chip fc-2">
+        <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+        Monthly goal reached
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ===== Features ===== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Features</span>
+      <h2>Everything you need to manage your money</h2>
+      <p>MyWallet brings all the everyday finance tools together in one simple interface.</p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 6H9.5a3 3 0 000 6h5a3 3 0 010 6H6"/></svg></div>
+        <h3>Quick expense logging</h3>
+        <p>Log an expense in under three seconds; smart categorization does the rest for you.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V9m5 10V4m5 15v-7m5 7V7"/></svg></div>
+        <h3>Visual reports</h3>
+        <p>Watch your monthly spending and savings trends in live, easy-to-read charts.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Bill reminders</h3>
+        <p>Never miss a due date again; the app nudges you right on time.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-4.6-9-9a5 5 0 019-3 5 5 0 019 3c-2 4.4-9 9-9 9z"/></svg></div>
+        <h3>Savings goals</h3>
+        <p>Set a goal for a trip, a phone or any other dream and watch it fill up step by step.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+        <h3>Bank-grade security</h3>
+        <p>Your data never leaves your device; it is locked with a PIN and fingerprint.</p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-icon"><svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 11-9-9"/><path d="M21 3l-9 9"/><path d="M15 3h6v6"/></svg></div>
+        <h3>Cloud sync</h3>
+        <p>Your data stays identical across phone and tablet — with zero extra work.</p>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ===== Screenshots ===== -->
+<section class="section section-alt" id="screenshots">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Screenshots</span>
+      <h2>A look inside the app</h2>
+      <p>Tap any screen to enlarge it.</p>
+    </div>
+    <div class="shots-scroll" tabindex="0" aria-label="Screenshot gallery — scroll to browse">
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="Enlarge: main dashboard">
+        <div class="shot-screen">
+          <b>Today</b>
+          <span class="ln ln-a"></span><span class="ln ln-b"></span>
+          <div class="shot-block"><b>2,340,000</b><span class="ln ln-c"></span><span class="ln ln-d"></span></div>
+          <span class="ln ln-b"></span><span class="ln ln-c"></span>
+        </div>
+        <figcaption class="shot-caption">Main dashboard</figcaption>
+      </figure>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="Enlarge: quick expense entry">
+        <div class="shot-screen alt">
+          <b>Add expense</b>
+          <div class="shot-block"><span class="ln ln-a"></span><span class="ln ln-c"></span></div>
+          <span class="ln ln-b"></span><span class="ln ln-d"></span><span class="ln ln-a"></span>
+        </div>
+        <figcaption class="shot-caption">Quick expense entry</figcaption>
+      </figure>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="Enlarge: savings goal progress">
+        <div class="shot-screen">
+          <b>My goals</b>
+          <div class="shot-block"><b>64%</b><span class="ln ln-d"></span></div>
+          <span class="ln ln-c"></span><span class="ln ln-b"></span>
+        </div>
+        <figcaption class="shot-caption">Savings goal progress</figcaption>
+      </figure>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="Enlarge: monthly spending chart">
+        <div class="shot-screen alt">
+          <b>Monthly report</b>
+          <svg aria-hidden="true" viewBox="0 0 120 60" style="inline-size:100%"><rect x="6" y="30" width="12" height="24" rx="3" style="fill:var(--accent)"/><rect x="26" y="20" width="12" height="34" rx="3" style="fill:var(--accent)"/><rect x="46" y="34" width="12" height="20" rx="3" style="fill:var(--data-idle)"/><rect x="66" y="12" width="12" height="42" rx="3" style="fill:var(--accent-2)"/><rect x="86" y="24" width="12" height="30" rx="3" style="fill:var(--accent)"/></svg>
+          <span class="ln ln-b"></span>
+        </div>
+        <figcaption class="shot-caption">Monthly spending chart</figcaption>
+      </figure>
+      <figure class="shot" data-shot tabindex="0" role="button" aria-label="Enlarge: bill due dates">
+        <div class="shot-screen">
+          <b>Reminders</b>
+          <div class="shot-block"><span class="ln ln-a"></span></div>
+          <div class="shot-block"><span class="ln ln-c"></span></div>
+          <span class="ln ln-b"></span><span class="ln ln-d"></span>
+        </div>
+        <figcaption class="shot-caption">Bill due dates</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== How it works ===== -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">How it works</span>
+      <h2>Start in three steps</h2>
+    </div>
+    <ol class="steps-grid">
+      <li class="step-card">
+        <b class="step-num">1</b>
+        <h3>Install &amp; sign up</h3>
+        <p>Install the app from Bazaar or directly, and sign in with your phone number.</p>
+      </li>
+      <li class="step-card">
+        <b class="step-num">2</b>
+        <h3>Connect accounts</h3>
+        <p>Connect your bank accounts so transactions get categorized automatically.</p>
+      </li>
+      <li class="step-card">
+        <b class="step-num">3</b>
+        <h3>Smart budgeting</h3>
+        <p>Set a monthly goal and let MyWallet smooth your path to saving.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+<!-- ===== Reviews ===== -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">User reviews</span>
+      <h2>What people are saying</h2>
+    </div>
+    <div class="reviews-grid">
+      <article class="review-card">
+        <div class="review-stars" aria-label="Rated 5 out of 5">★★★★★</div>
+        <p>“Two months in, and for the first time I actually know where my money goes. The savings-goals section is brilliant.”</p>
+        <footer><span class="review-avatar" style="--av:#22D3EE">S</span><div><b>Sara M.</b><small>Tehran · Android</small></div></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="Rated 5 out of 5">★★★★★</div>
+        <p>“The interface is so simple that my 58-year-old dad uses it without any training. Great job by the makers.”</p>
+        <footer><span class="review-avatar" style="--av:#8B5CF6">A</span><div><b>Amir R.</b><small>Isfahan · Android</small></div></footer>
+      </article>
+      <article class="review-card">
+        <div class="review-stars" aria-label="Rated 4 out of 5">★★★★<span class="off">★</span></div>
+        <p>“Really good — I just wish it had Excel export. Everything else works flawlessly, with zero lag.”</p>
+        <footer><span class="review-avatar" style="--av:#F59E0B">N</span><div><b>Negar K.</b><small>Mashhad · iOS</small></div></footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section section-alt" id="faq">
+  <div class="container faq-wrap">
+    <div class="section-head">
+      <span class="kicker">FAQ</span>
+      <h2>Every question, answered</h2>
+    </div>
+    <details class="faq-item">
+      <summary>Is the MyWallet app free?<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <p>The base version is completely free. Pro features such as unlimited reports and cloud sync are available with the MyWallet Plus subscription.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Is my banking data safe?<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <p>Yes. Data is stored encrypted and only on your device; no sensitive information is ever kept on a server.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Which devices are supported?<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <p>Android 8+ and iOS 13+. The interface is also optimized for tablets.</p>
+    </details>
+    <details class="faq-item">
+      <summary>How do I cancel my subscription?<svg class="faq-chev" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+      <p>Go to Settings → Account → Manage subscription. You can cancel anytime, with no penalty.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ===== Final CTA + Footer ===== -->
+</main>
+<footer class="site-footer" id="download">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Download MyWallet today</h2>
+      <p>Join more than <b>50,000</b> users who have put their finances in order.</p>
+      <div class="store-buttons center">
+        <!-- placeholder links: replace each href with the real store link -->
+        <a class="btn btn-store light" href="#" data-store-demo data-toast="Demo link — in the final version, replace this button's href with your app's real store link." aria-label="Get it on Cafe Bazaar"><span><small>Get it on</small>Cafe Bazaar</span></a>
+        <a class="btn btn-store light" href="#" data-store-demo data-toast="Demo link — in the final version, replace this button's href with your app's real store link." aria-label="Get it on Myket"><span><small>Get it on</small>Myket</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 1405 Landixa Template — Crafted for rtl-theme.com</div>
+  </div>
+</footer>
+
+<!-- Lightbox (single instance) -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button class="lb-close" id="lbClose" aria-label="Close">×</button>
+  <div class="lb-body" id="lbBody"></div>
+</div>
+<script src="../assets/js/main.js" defer></script>
+</body>
+</html>

@@ -12,16 +12,30 @@ anywhere) and a **manual browser** pass (the real proof).
 node tools/self-check.mjs
 ```
 
-Pure Node, **no dependencies, no `npm install`**. It reads `index.html`,
-`assets/css/style.css` and `assets/js/main.js` and asserts every hard rule:
+Pure Node, **no dependencies, no `npm install`**. It reads every page
+(`index.html`, the two variant homes, the two blog pages, the English
+LTR twin), `assets/css/style.css` and `assets/js/main.js` and asserts
+every hard rule:
 
 - no external URLs / `@import` / CDN references (rules 1, 4)
-- every local `href` / `src` / `url()` exists on disk (no 404s from `file://`)
+- every local `href` / `src` / `url()` exists on disk, resolved against the
+  page's own directory (no 404s from `file://`; works inside subfolders
+  like `blog/`)
 - all named anchors resolve to existing `id`s
 - exactly the 3 local Vazirmatn `@font-face` files, all present, no other font source (rules 1, 3)
 - RTL-first: `dir="rtl"`, no physical `left/right` CSS properties (rule 2)
 - no personal links — `github.com`, `t.me/`, `mailto:`, `telegram` (rule 5, §6)
-- no Gregorian-style dates in the page (rule 4)
+- no Gregorian-style dates on any page — Jalali only (rule 4)
+- blog pages exist, are `dir=rtl lang=fa`, share the single
+  `../assets/css/style.css` + `main.js`, carry no external/personal links,
+  and their refs resolve from `blog/`
+- the LTR twin exists (`ltr/index.html`), is `lang=en dir=ltr`, shares the
+  single stylesheet + `main.js`, carries no external/personal links, its
+  anchors/refs resolve from `ltr/`, and it is fully translated (no
+  Arabic-script characters left)
+- marketing sources exist (`marketing/`: icon 320×320, cover 2100×1040,
+  infographic — pure HTML/CSS, no AI images), share the single
+  `../assets/css/style.css`, and carry no external/personal refs
 - accessibility inventory: decorative SVGs `aria-hidden`, nav-toggle ARIA
   triple, lightbox `role=dialog`/`aria-modal`/labelled close, shots are
   keyboard buttons, reduced-motion kill present (rule 9)

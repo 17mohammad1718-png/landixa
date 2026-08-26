@@ -186,7 +186,7 @@
   });
 
   /* ---- Reveal on scroll (progressive enhancement) ---- */
-  var reveals = $$('.feature-card, .review-card, .step-card');
+  var reveals = $$('.feature-card, .review-card, .step-card, .post-card');
   if ('IntersectionObserver' in window) {
     reveals.forEach(function (el) { el.classList.add('will-reveal'); });
     var io = new IntersectionObserver(function (entries) {
