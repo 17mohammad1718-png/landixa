@@ -53,10 +53,12 @@ Goal: replicate the "multiple home versions" value driver of APPER/Apdash.
       HTML/CSS→PNG (NO AI images) (owner reviews before use)
       <!-- 3A DONE 1405/06/04: all agent items complete, 27/27 checks -->
 - [ ] VirusTotal scan (owner, manual)
-- [ ] Demo deploy: GitHub Pages on this repo (owner)
+- [x] Demo deploy: GitHub Pages on this repo (owner)
+      <!-- DONE 1405/06/04: https://17mohammad1718-png.github.io/landixa/ -->
 - [ ] Submit via rtl-theme vendor panel (owner)
 
 ## Phase 4 — post-approval ops
 - [ ] Release cadence: minor update every ≤10 days (12-day rule)
-- [ ] Support reply templates `docs/support-replies.md`
+- [x] Support reply templates `docs/support-replies.md`
+      <!-- DONE 1405/06/04: 10 common buyer Q&A in Persian -->
 - [ ] Track Q&A questions buyers ask → fold answers into FAQ + listing
