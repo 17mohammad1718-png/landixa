@@ -93,16 +93,16 @@ ok('reduced-motion kill present in CSS',
    css.includes('@media(prefers-reduced-motion:reduce)') && css.includes('animation:none'));
 
 /* ---- 8. variant pages (Phase 2A) ---- */
-const pages = ['index.html', 'home-light.html'];
+const pages = ['index.html', 'home-light.html', 'home-warm.html'];
 const missingPages = pages.filter((p) => !existsSync(path.join(REPO, p)));
-ok('variant page exists: home-light.html',
+ok('variant pages exist: home-light.html + home-warm.html',
    missingPages.length === 0, missingPages.join(' '));
 const pageSources = {};
 for (const p of pages) if (existsSync(path.join(REPO, p))) pageSources[p] = read(p);
 
 // correct dir/lang + the right data-theme on every home page
 const themeAttr = (src) => (src.match(/<html[^>]*data-theme="([^"]+)"/) || [,''])[1];
-const pageThemes = { 'index.html': '', 'home-light.html': 'light' };
+const pageThemes = { 'index.html': '', 'home-light.html': 'light', 'home-warm.html': 'warm' };
 const badThemes = Object.entries(pageThemes).filter(([p, want]) => {
   const src = pageSources[p];
   return !src || themeAttr(src) !== want ||
